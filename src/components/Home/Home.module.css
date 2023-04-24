@@ -1,15 +1,15 @@
 .home-container {
-    max-width: 800px;
+    max-width: 700px;
     margin: 0 auto;
-    padding: 40px;
+    padding: 30px;
     text-align: center;
   }
   
   .home-title {
     margin-top: 3rem;
-    font-size: 36px;
+    font-size: 30px;
     font-weight: bold;
-    margin-bottom: 20px;
+    margin-bottom: 1rem;
   }
   
     @media screen and (max-width: 768px) {
