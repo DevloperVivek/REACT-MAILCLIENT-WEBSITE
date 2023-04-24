@@ -1,21 +1,54 @@
 import React, { useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import classes from "./Login.module.css";
+import { useDispatch } from "react-redux";
+import { AuthAction } from "../../context/Auth-Redux";
 
 const Login = () => {
   const emailRef = useRef();
   const passRef = useRef();
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
-  const submitHandler = () => {
-    navigate("/");
-  };
+  const url =
+    "https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyDOMf3JdvgxLtmdGNjR1ZowZ1Lsk-b4bec";
+
   const toggleHandler = () => {
     navigate("/Signup");
   };
   const forgotPasswordHandler = () => {
     console.log("FORGOT");
   };
+
+  const submitHandler = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await fetch(url, {
+        method: "POST",
+        body: JSON.stringify({
+          email: emailRef.current.value,
+          password: passRef.current.value,
+          returnSecureToken: true,
+        }),
+        headers: {
+          "Content-Type": "apllication/json",
+        },
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        console.log(data);
+        const set = {
+          id: data.idToken,
+          email: emailRef.current.value,
+        };
+        dispatch(AuthAction.login(set));
+        console.log("Successfully Logged In");
+        navigate("/");
+      }
+    } catch {}
+  };
+
   return (
     <center className={classes.container}>
       <div className={classes.SignUp}>
