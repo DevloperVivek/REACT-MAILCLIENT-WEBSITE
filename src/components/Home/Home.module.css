@@ -12,12 +12,27 @@
     margin-bottom: 1rem;
   }
   
-    @media screen and (max-width: 768px) {
+  .btn { 
+    margin: 0px 10px;
+    margin-left: 33rem;
+    border: none;
+    color: white;
+    font-size: 20px;
+    padding: 10px 40px;
+    border-radius: 20px;
+    border-color: black;
+    background: rgb(0, 0, 0);
+  }
+
+  @media screen and (max-width: 720px) {
     .home-title {
       font-size: 24px;
     }
     .home-container {
       padding: 20px;
+    }
+    .btn {
+      margin-left: 280px;
     }
   }
   

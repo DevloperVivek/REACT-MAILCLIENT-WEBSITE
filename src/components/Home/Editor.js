@@ -17,6 +17,7 @@ const Editor = () => {
     const res = await fetch(url, {
       method: "Post",
       body: JSON.stringify({
+        from: draftemail,
         to: emailRef.current.value,
         subject: subRef.current.value,
         edit: editorRef.current.value,

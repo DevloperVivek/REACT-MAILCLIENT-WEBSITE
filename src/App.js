@@ -4,6 +4,8 @@ import Signup from "./components/Auth/Signup";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Login from "./components/Auth/Login";
 import Home from "./components/Home/Home";
+import Inbox from "./components/Inbox/Inbox";
+import Editor from "./components/Home/Editor";
 
 function App() {
   return (
@@ -13,6 +15,8 @@ function App() {
         <Route path={"/"} element={<Home />} />
         <Route path={"/Signup"} element={<Signup />} />
         <Route path={"/Login"} element={<Login />} />
+        <Route path={"/Inbox"} element={<Inbox />} />
+        <Route path={"/Editor"} element={<Editor />} />
       </Routes>
     </Router>
   );

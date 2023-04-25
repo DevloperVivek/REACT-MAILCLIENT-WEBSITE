@@ -1,5 +1,5 @@
   body {
-  background-image: url("https://cdn.pixabay.com/photo/2014/12/15/15/36/blue-569222__340.jpg");
+  background-image: url("https://images.pexels.com/photos/7794441/pexels-photo-7794441.jpeg?auto=compress&cs=tinysrgb&w=400");
   }
 
   .container {
@@ -68,8 +68,9 @@
     text-align: center;
     margin-top: 10px;
   }
+
   
-  @media (min-width: 768px) {
+  @media (min-width: 720px) {
     .container {
       justify-content: center;
     }

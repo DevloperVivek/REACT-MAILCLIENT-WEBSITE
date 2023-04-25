@@ -1,0 +1,76 @@
+.EmailCardContainer {
+    border: 1px solid #ccc;
+    padding: 20px;
+    margin: 7rem;
+    margin-top: 10rem;
+    cursor: pointer;
+    position: absolute;
+    top: 0; 
+    left: 0;
+    height: 50%;
+    width: 80%; 
+    z-index: 1; 
+    background-color: #defcff;
+}
+  
+  .EmailCardContainer:hover {
+    background-color: #c8ffff;
+  }
+  
+  .EmailCardContainer h4 {
+    margin: 1rem;
+    font-size: 16px;
+    font-weight: bold;
+  }
+  
+  .EmailCardContainer h5 {
+    margin: 1rem;
+    font-size: 14px;
+    font-weight: bold;
+  }
+  
+  .EmailCardContainer p {
+    margin: 1rem;
+    font-size: 14px;
+    color: #555;
+  }
+  
+  .closeBtn {
+    display: flex;
+    justify-content: flex-end; 
+    margin-top: 4rem; 
+    margin-right: 1rem;
+}
+  
+  .closeBtn button {
+    padding: 10px;
+    border: none;
+    background-color: #000000;
+    color: #fff;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+  }
+  
+  .closeBtn button:hover {
+    background-color: #007700;
+  }
+  
+  .EmailCardContainer .date {
+    margin-top: 5px;
+  }
+  
+  .EmailCardContainer .isRead {
+    color: #009900;
+  }
+  
+  .EmailCardContainer .notRead {
+    color: #cc0000;
+  }
+
+  @media screen and (max-width:720px){
+    .EmailCardContainer {
+      margin: 13rem 3rem;
+      height: auto;
+    }
+  }
