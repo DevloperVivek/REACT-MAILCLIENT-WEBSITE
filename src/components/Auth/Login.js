@@ -46,7 +46,9 @@ const Login = () => {
         console.log("Successfully Logged In");
         navigate("/");
       }
-    } catch {}
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (

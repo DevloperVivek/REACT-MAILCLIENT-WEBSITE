@@ -1,33 +1,46 @@
 import React, { useState, useEffect } from "react";
-import classes from "./Inbox.module.css";
 import { useSelector } from "react-redux";
 import EmailCard from "./EmailCard";
+import { useNavigate } from "react-router-dom";
+import classes from "./Sent.module.css";
 
 const Inbox = () => {
-  const [selectedEmail, setSelectedEmail] = useState(null); // Add state for selected email
-
+  const [selectedEmail, setSelectedEmail] = useState(null);
   const [emails, setEmails] = useState([]);
   const draftemail = useSelector((state) => state.auth.email);
+  const loggedIn = localStorage.getItem("login");
+  const navigate = useNavigate();
+  const [read, setRead] = useState(false);
+  const mails = emails.length;
+
+  useEffect(() => {
+    if (!loggedIn) {
+      navigate("/Login");
+    }
+  }, []);
 
   useEffect(() => {
     const fetchEmails = async () => {
       try {
-        const emailId = draftemail.split("@")[0];
-        console.log(emailId);
+        const email = draftemail.split("@");
         const res = await fetch(
-          `https://react-mailbox-6bafc-default-rtdb.asia-southeast1.firebasedatabase.app/mail/${emailId}/receive.json`
+          `https://react-mailbox-6bafc-default-rtdb.asia-southeast1.firebasedatabase.app/mail/${email[0]}/receive.json`
         );
 
         if (res.ok) {
           const data = await res.json();
           console.log(data);
-          const emailsArr = [];
+          let unRead = 0;
+          let emailsArr = [];
 
-          for (const key in data) {
-            emailsArr.push({ id: key, ...data[key] });
-          }
+          console.log(emailsArr);
+          emailsArr = Object.keys(data).map((key) => ({
+            id: key,
+            ...data[key],
+          }));
 
           setEmails(emailsArr);
+          console.log(emails);
         } else {
           throw new Error("Failed to fetch emails");
         }
@@ -36,47 +49,85 @@ const Inbox = () => {
       }
     };
     fetchEmails();
-  }, [draftemail]);
+  }, [setSelectedEmail]);
 
-  const handleEmailClick = (email) => {
+  const handleEmailClick = async (email) => {
     setSelectedEmail(email);
+    setRead(true);
+    console.log(email.date);
+    const emailId = draftemail.split("@")[0];
+    console.log(emailId);
+    const emailDate = new Date(email.date).toISOString();
+    console.log(emailDate);
+
+    const res = await fetch(
+      `https://react-mailbox-6bafc-default-rtdb.asia-southeast1.firebasedatabase.app/mail/${emailId}/receive/${email.id}.json`,
+      {
+        method: "PUT",
+        body: JSON.stringify({
+          data: email.data,
+          edit: email.edit,
+          from: email.from,
+          isRead: false,
+          subject: email.subject,
+        }),
+      }
+    );
+    if (res.ok) {
+      console.log("Done");
+    }
   };
 
   const handleCloseEmailCard = () => {
     setSelectedEmail(null);
   };
 
+  const getSimplifiedDate = (dateString) => {
+    const date = new Date(dateString);
+    return date.toLocaleString();
+  };
+
+  const deleteHandler = async (id) => {
+    try {
+      const res = await fetch(
+        `https://react-mailbox-6bafc-default-rtdb.asia-southeast1.firebasedatabase.app/mail/${id}.json`,
+        {
+          method: "DELETE",
+        }
+      );
+      if (res.ok) {
+        console.log("Email deleted successfully");
+        setEmails(emails.filter((email) => email.id !== id));
+      } else {
+        throw new Error("Failed to delete email");
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  console.log(emails);
   return (
     <div className={classes.InboxContainer}>
-      <h3>Inbox</h3>
+      <h3>Inbox ({mails})</h3>
       <div className={classes.EmailsContainer}>
-        {emails.length > 0 ? (
+        {emails.length > 0 &&
           emails.map((email) => (
-            <div
-              key={email.id}
-              className={classes.EmailItem}
-              onClick={() => handleEmailClick(email)}
-            >
-              <h4>From: {email.from}</h4>
-              {/* <h5>Subject: {email.subject}</h5> */}
-              {/* <p>Body: {email.edit}</p> */}
-              <p>Date: {email.data}</p>
-              <p>Read: {email.isRead ? "Yes" : "No"}</p>
+            <div key={email.id}>
+              <div className={classes.EmailItem}>
+                <h4>From: {email.from}</h4>
+                <p>Date:{getSimplifiedDate(email.data)}</p>
+                <button onClick={() => handleEmailClick(email)}>Open</button>
+                <button onClick={() => deleteHandler(email.id)}>Delete</button>
+                {email.isRead && <span className={classes.unRead} />}
+              </div>
             </div>
-          ))
-        ) : (
-          <p>No emails found</p>
-        )}
+          ))}
+        {emails.length === 0 && <h2>No emails found</h2>}
       </div>
       {selectedEmail ? (
         <EmailCard email={selectedEmail} onClose={handleCloseEmailCard} />
       ) : null}
-      {/* {selectedEmail && ( // Render the Editor component when an email is selected
-        <Editor
-          email={selectedEmail}
-          onClose={() => setSelectedEmail(null)} // Add close event handler
-        />
-      )} */}
     </div>
   );
 };

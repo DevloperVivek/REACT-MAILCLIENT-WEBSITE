@@ -4,9 +4,15 @@
     padding: 1rem;
   }
   
+  .InboxContainer h3 {
+    font-size: 30px;
+    text-align: center;
+  }
+
   .EmailsContainer {
     display: flex;
     flex-wrap: wrap;
+    margin: 50px 50px;
   }
   
   .EmailItem {
@@ -23,6 +29,16 @@
     margin: 0;
   }
   
+  .unRead {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: rgb(94, 193, 255);
+  display: inline-block;
+  margin-left: 120px;
+}
+
+
   @media (max-width: 768px) {
     .EmailItem {
       flex-basis: 100%;

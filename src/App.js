@@ -6,6 +6,7 @@ import Login from "./components/Auth/Login";
 import Home from "./components/Home/Home";
 import Inbox from "./components/Inbox/Inbox";
 import Editor from "./components/Home/Editor";
+import Sent from "./components/Inbox/Sent";
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
         <Route path={"/Login"} element={<Login />} />
         <Route path={"/Inbox"} element={<Inbox />} />
         <Route path={"/Editor"} element={<Editor />} />
+        <Route path={"/Sent"} element={<Sent />} />
       </Routes>
     </Router>
   );

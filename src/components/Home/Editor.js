@@ -9,7 +9,7 @@ const Editor = () => {
   const emailRef = useRef();
   const subRef = useRef();
   const editorRef = useRef();
-  const url = `https://react-mailbox-6bafc-default-rtdb.asia-southeast1.firebasedatabase.app/Email/${email[0]}/send.json`;
+  const url = `https://react-mailbox-6bafc-default-rtdb.asia-southeast1.firebasedatabase.app/mail/${email[0]}/send.json`;
 
   const submitHandler = async (e) => {
     e.preventDefault();
