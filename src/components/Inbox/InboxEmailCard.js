@@ -7,7 +7,6 @@ const EmailCard = ({ email, onClose }) => {
     return date.toLocaleString();
   };
 
-  console.log(email);
   return (
     <div className={classes.EmailCardContainer}>
       <div className={classes.EmailCardHeader}>

@@ -44,7 +44,7 @@ const Login = () => {
         };
         dispatch(AuthAction.login(set));
         console.log("Successfully Logged In");
-        navigate("/");
+        navigate("/Home");
       }
     } catch (error) {
       console.log(error);

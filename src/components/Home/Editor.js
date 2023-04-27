@@ -33,7 +33,7 @@ const Editor = () => {
           from: draftemail,
           subject: subRef.current.value,
           edit: editorRef.current.value,
-          data: new Date(),
+          date: new Date(),
           isRead: true,
         }),
       }

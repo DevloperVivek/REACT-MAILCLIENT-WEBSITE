@@ -16,12 +16,10 @@ const Sent = () => {
         const res = await fetch(
           `https://react-mailbox-6bafc-default-rtdb.asia-southeast1.firebasedatabase.app/mail/${email[0]}/send.json`
         );
-
         if (res.ok) {
           const data = await res.json();
           console.log(data);
           let sentEmailsArr = [];
-
           sentEmailsArr = Object.keys(data).map((key) => ({
             id: key,
             ...data[key],
@@ -48,13 +46,14 @@ const Sent = () => {
   };
 
   const deleteHandler = async (emailId) => {
+    const dlt = draftemail.split("@");
+    console.log(dlt[0]);
+    console.log(emailId);
+    const url = `https://react-mailbox-6bafc-default-rtdb.asia-southeast1.firebasedatabase.app/mail/${dlt[0]}/send/${emailId}.json`;
     try {
-      const res = await fetch(
-        `https://react-mailbox-6bafc-default-rtdb.asia-southeast1.firebasedatabase.app/mail/${emailId}.json`,
-        {
-          method: "DELETE",
-        }
-      );
+      const res = await fetch(url, {
+        method: "DELETE",
+      });
       if (res.ok) {
         console.log("Email deleted successfully");
         setSentEmails(sentEmails.filter((email) => email.id !== emailId));

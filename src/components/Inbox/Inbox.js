@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
-import EmailCard from "./EmailCard";
 import { useNavigate } from "react-router-dom";
+import InboxEmailCard from "./InboxEmailCard";
 import classes from "./Sent.module.css";
 
 const Inbox = () => {
@@ -26,19 +26,13 @@ const Inbox = () => {
         const res = await fetch(
           `https://react-mailbox-6bafc-default-rtdb.asia-southeast1.firebasedatabase.app/mail/${email[0]}/receive.json`
         );
-
         if (res.ok) {
           const data = await res.json();
-          console.log(data);
-          let unRead = 0;
           let emailsArr = [];
-
-          console.log(emailsArr);
           emailsArr = Object.keys(data).map((key) => ({
             id: key,
             ...data[key],
           }));
-
           setEmails(emailsArr);
           console.log(emails);
         } else {
@@ -54,9 +48,8 @@ const Inbox = () => {
   const handleEmailClick = async (email) => {
     setSelectedEmail(email);
     setRead(true);
-    console.log(email.date);
+    console.log(email.data);
     const emailId = draftemail.split("@")[0];
-    console.log(emailId);
     const emailDate = new Date(email.date).toISOString();
     console.log(emailDate);
 
@@ -65,7 +58,7 @@ const Inbox = () => {
       {
         method: "PUT",
         body: JSON.stringify({
-          data: email.data,
+          date: emailDate,
           edit: email.edit,
           from: email.from,
           isRead: false,
@@ -88,13 +81,12 @@ const Inbox = () => {
   };
 
   const deleteHandler = async (id) => {
+    const dlt = draftemail.split("@");
+    const url = `https://react-mailbox-6bafc-default-rtdb.asia-southeast1.firebasedatabase.app/mail/${dlt[0]}/receive/${id}.json`;
     try {
-      const res = await fetch(
-        `https://react-mailbox-6bafc-default-rtdb.asia-southeast1.firebasedatabase.app/mail/${id}.json`,
-        {
-          method: "DELETE",
-        }
-      );
+      const res = await fetch(url, {
+        method: "DELETE",
+      });
       if (res.ok) {
         console.log("Email deleted successfully");
         setEmails(emails.filter((email) => email.id !== id));
@@ -116,7 +108,7 @@ const Inbox = () => {
             <div key={email.id}>
               <div className={classes.EmailItem}>
                 <h4>From: {email.from}</h4>
-                <p>Date:{getSimplifiedDate(email.data)}</p>
+                <p>Date:{getSimplifiedDate(email.date)}</p>
                 <button onClick={() => handleEmailClick(email)}>Open</button>
                 <button onClick={() => deleteHandler(email.id)}>Delete</button>
                 {email.isRead && <span className={classes.unRead} />}
@@ -126,7 +118,7 @@ const Inbox = () => {
         {emails.length === 0 && <h2>No emails found</h2>}
       </div>
       {selectedEmail ? (
-        <EmailCard email={selectedEmail} onClose={handleCloseEmailCard} />
+        <InboxEmailCard email={selectedEmail} onClose={handleCloseEmailCard} />
       ) : null}
     </div>
   );
