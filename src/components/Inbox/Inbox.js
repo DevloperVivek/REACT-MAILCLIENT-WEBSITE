@@ -10,8 +10,10 @@ const Inbox = () => {
   const draftemail = useSelector((state) => state.auth.email);
   const loggedIn = localStorage.getItem("login");
   const navigate = useNavigate();
-  const [read, setRead] = useState(false);
+  // const [read, setRead] = useState(false);
+  let [unReadCount, setUnReadCount] = useState(0);
   const mails = emails.length;
+  console.log(unReadCount);
 
   useEffect(() => {
     if (!loggedIn) {
@@ -29,12 +31,12 @@ const Inbox = () => {
         if (res.ok) {
           const data = await res.json();
           let emailsArr = [];
+          unReadCount += 1;
           emailsArr = Object.keys(data).map((key) => ({
             id: key,
             ...data[key],
           }));
           setEmails(emailsArr);
-          console.log(emails);
         } else {
           throw new Error("Failed to fetch emails");
         }
@@ -42,12 +44,16 @@ const Inbox = () => {
         console.error(error);
       }
     };
-    fetchEmails();
-  }, [setSelectedEmail]);
+    const interval = setInterval(fetchEmails, 2000);
+    return () => {
+      clearInterval(interval);
+    };
+  }, [setSelectedEmail, selectedEmail]);
 
   const handleEmailClick = async (email) => {
     setSelectedEmail(email);
-    setRead(true);
+    // setRead(true);
+    unReadCount -= 1;
     console.log(email.data);
     const emailId = draftemail.split("@")[0];
     const emailDate = new Date(email.date).toISOString();
@@ -70,6 +76,16 @@ const Inbox = () => {
       console.log("Done");
     }
   };
+
+  useEffect(() => {
+    let count = 0;
+    emails.forEach((email) => {
+      if (email.isRead) {
+        count++;
+      }
+    });
+    setUnReadCount(count);
+  }, [emails]);
 
   const handleCloseEmailCard = () => {
     setSelectedEmail(null);
@@ -98,10 +114,14 @@ const Inbox = () => {
     }
   };
 
-  console.log(emails);
   return (
     <div className={classes.InboxContainer}>
-      <h3>Inbox ({mails})</h3>
+      <h3>
+        Inbox (All Mails: {mails})
+        {unReadCount > 0 && (
+          <span className={classes.unreadcount}>Unread: {unReadCount}</span>
+        )}
+      </h3>
       <div className={classes.EmailsContainer}>
         {emails.length > 0 &&
           emails.map((email) => (

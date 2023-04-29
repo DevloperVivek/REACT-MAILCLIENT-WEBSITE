@@ -26,7 +26,7 @@ const Sent = () => {
           }));
 
           setSentEmails(sentEmailsArr);
-          console.log(sentEmails);
+          // console.log(sentEmails);
         } else {
           throw new Error("Failed to fetch sent emails");
         }

@@ -9,6 +9,10 @@
     text-align: center;
   }
 
+  .InboxContainer span {
+    color: aquamarine;
+  }
+
   .EmailsContainer {
     display: flex;
     flex-wrap: wrap;

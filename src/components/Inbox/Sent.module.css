@@ -1,4 +1,4 @@
-.InboxContainer {
+  .InboxContainer {
     max-width: 800px;
     margin: 2rem auto;
     padding: 1rem;
@@ -10,13 +10,15 @@
 
   .EmailsContainer {
     margin-top: 1rem;
+    border-radius: 15px;
+    padding: 1px 5px;
+    background-color: rgb(223, 247, 255);
   }
   
   .EmailItem {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    border-bottom: 1px solid #ccc;
     padding: 0.5rem;
   }
   
@@ -32,7 +34,7 @@
   }
   
   .EmailItem button {
-    margin-left: 0.5rem;
+    margin-left: 0.2rem;
     cursor: pointer;
     background: none;
     border: none;
@@ -49,9 +51,12 @@
     height: 8px;
     background-color: #007bff;
     border-radius: 50%;
-    margin-left: 0.5rem;
   }
   
+  .unreadcount{
+    margin: 15px;
+    color: #007bff; 
+  }
   .EmailCardContainer {
     position: fixed;
     top: 0;
