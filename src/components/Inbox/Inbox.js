@@ -3,6 +3,7 @@ import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import InboxEmailCard from "./InboxEmailCard";
 import classes from "./Sent.module.css";
+import useHttp from "../../hooks/use-http";
 
 const Inbox = () => {
   const [selectedEmail, setSelectedEmail] = useState(null);
@@ -10,7 +11,6 @@ const Inbox = () => {
   const draftemail = useSelector((state) => state.auth.email);
   const loggedIn = localStorage.getItem("login");
   const navigate = useNavigate();
-  // const [read, setRead] = useState(false);
   let [unReadCount, setUnReadCount] = useState(0);
   const mails = emails.length;
   console.log(unReadCount);
@@ -52,7 +52,6 @@ const Inbox = () => {
 
   const handleEmailClick = async (email) => {
     setSelectedEmail(email);
-    // setRead(true);
     unReadCount -= 1;
     console.log(email.data);
     const emailId = draftemail.split("@")[0];
@@ -96,19 +95,16 @@ const Inbox = () => {
     return date.toLocaleString();
   };
 
+  const { sendDeleteRequest } = useHttp();
+
   const deleteHandler = async (id) => {
     const dlt = draftemail.split("@");
     const url = `https://react-mailbox-6bafc-default-rtdb.asia-southeast1.firebasedatabase.app/mail/${dlt[0]}/receive/${id}.json`;
     try {
-      const res = await fetch(url, {
-        method: "DELETE",
-      });
-      if (res.ok) {
-        console.log("Email deleted successfully");
-        setEmails(emails.filter((email) => email.id !== id));
-      } else {
-        throw new Error("Failed to delete email");
-      }
+      const data = await sendDeleteRequest(url);
+      console.log(data);
+      console.log("Email deleted successfully");
+      setEmails(emails.filter((email) => email.id !== id));
     } catch (error) {
       console.error(error);
     }

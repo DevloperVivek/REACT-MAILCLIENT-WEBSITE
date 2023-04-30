@@ -2,6 +2,7 @@ import JoditEditor from "jodit-react";
 import { useRef } from "react";
 import { useSelector } from "react-redux";
 import classes from "./Editor.module.css";
+import useHttp from "../../hooks/use-http";
 
 const Editor = () => {
   const draftemail = useSelector((state) => state.auth.email);
@@ -9,38 +10,35 @@ const Editor = () => {
   const emailRef = useRef();
   const subRef = useRef();
   const editorRef = useRef();
-  const url = `https://react-mailbox-6bafc-default-rtdb.asia-southeast1.firebasedatabase.app/mail/${email[0]}/send.json`;
+  const { isLoading, sendRequest } = useHttp();
 
   const submitHandler = async (e) => {
     e.preventDefault();
     const sendEmail = emailRef.current.value.split("@");
-    const res = await fetch(url, {
-      method: "Post",
-      body: JSON.stringify({
-        from: draftemail,
-        to: emailRef.current.value,
-        subject: subRef.current.value,
-        edit: editorRef.current.value,
-        date: new Date(),
-      }),
-    });
+    const sendUrl = `https://react-mailbox-6bafc-default-rtdb.asia-southeast1.firebasedatabase.app/mail/${sendEmail[0]}/receive.json`;
+    const sendBody = {
+      from: draftemail,
+      subject: subRef.current.value,
+      edit: editorRef.current.value,
+      date: new Date(),
+      isRead: true,
+    };
 
-    const ret = await fetch(
-      `https://react-mailbox-6bafc-default-rtdb.asia-southeast1.firebasedatabase.app/mail/${sendEmail[0]}/receive.json`,
-      {
-        method: "Post",
-        body: JSON.stringify({
-          from: draftemail,
-          subject: subRef.current.value,
-          edit: editorRef.current.value,
-          date: new Date(),
-          isRead: true,
-        }),
-      }
-    );
+    // Custom Hook useHttp
+    const resData = await sendRequest(sendUrl, "POST", sendBody);
 
-    if (res.ok && ret.ok) {
-      alert("Email has been send");
+    const url = `https://react-mailbox-6bafc-default-rtdb.asia-southeast1.firebasedatabase.app/mail/${email[0]}/send.json`;
+    const body = {
+      from: draftemail,
+      to: emailRef.current.value,
+      subject: subRef.current.value,
+      edit: editorRef.current.value,
+      date: new Date(),
+    };
+    const retData = await sendRequest(url, "POST", body);
+
+    if (resData && retData) {
+      alert("Email has been sent");
     }
   };
 
@@ -55,7 +53,7 @@ const Editor = () => {
           <JoditEditor ref={editorRef} />
           <br />
           <div className={classes.send}>
-            <button>Send</button>
+            <button disabled={isLoading}>Send</button>
           </div>
         </form>
       </div>
