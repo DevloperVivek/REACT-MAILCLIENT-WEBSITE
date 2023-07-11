@@ -11,7 +11,7 @@ const Login = () => {
   const dispatch = useDispatch();
 
   const url =
-    "https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyDOMf3JdvgxLtmdGNjR1ZowZ1Lsk-b4bec";
+    "https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyAJK2W3MMi1WznXQ-dd2YTCus4vrkE1v9I";
 
   const toggleHandler = () => {
     navigate("/Signup");

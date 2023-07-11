@@ -19,6 +19,7 @@
   
   .header-item span {
     margin: 0px 20px;
+    cursor: pointer;
   }
   
   .h1 {

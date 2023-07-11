@@ -10,7 +10,7 @@ const Sent = () => {
   const draftemail = useSelector((state) => state.auth.email);
   const sentMails = sentEmails.length;
   const email = draftemail.split("@");
-  const sendUrl = `https://react-mailbox-6bafc-default-rtdb.asia-southeast1.firebasedatabase.app/mail/${email[0]}/send.json`;
+  const sendUrl = `https://react-mail-client-b76f1-default-rtdb.asia-southeast1.firebasedatabase.app/mail/${email[0]}/send.json`;
 
   const handleEmailClick = (email) => {
     setSelectedEmail(email);
@@ -44,7 +44,7 @@ const Sent = () => {
 
   const deleteSentEmail = async (emailId) => {
     const dlt = draftemail.split("@");
-    const url = `https://react-mailbox-6bafc-default-rtdb.asia-southeast1.firebasedatabase.app/mail/${dlt[0]}/send/${emailId}.json`;
+    const url = `https://react-mail-client-b76f1-default-rtdb.asia-southeast1.firebasedatabase.app/mail/${dlt[0]}/send/${emailId}.json`;
     try {
       const data = await sendDeleteRequest(url);
       console.log(data);

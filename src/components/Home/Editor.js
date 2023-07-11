@@ -15,7 +15,7 @@ const Editor = () => {
   const submitHandler = async (e) => {
     e.preventDefault();
     const sendEmail = emailRef.current.value.split("@");
-    const sendUrl = `https://react-mailbox-6bafc-default-rtdb.asia-southeast1.firebasedatabase.app/mail/${sendEmail[0]}/receive.json`;
+    const sendUrl = `https://react-mail-client-b76f1-default-rtdb.asia-southeast1.firebasedatabase.app/mail/${sendEmail[0]}/receive.json`;
     const sendBody = {
       from: draftemail,
       subject: subRef.current.value,
@@ -27,7 +27,7 @@ const Editor = () => {
     // Custom Hook useHttp
     const resData = await sendRequest(sendUrl, "POST", sendBody);
 
-    const url = `https://react-mailbox-6bafc-default-rtdb.asia-southeast1.firebasedatabase.app/mail/${email[0]}/send.json`;
+    const url = `https://react-mail-client-b76f1-default-rtdb.asia-southeast1.firebasedatabase.app/mail/${email[0]}/send.json`;
     const body = {
       from: draftemail,
       to: emailRef.current.value,
@@ -35,6 +35,7 @@ const Editor = () => {
       edit: editorRef.current.value,
       date: new Date(),
     };
+
     const retData = await sendRequest(url, "POST", body);
 
     if (resData && retData) {

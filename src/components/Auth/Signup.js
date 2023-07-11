@@ -8,7 +8,7 @@ const Signup = () => {
   const confRef = useRef();
   const navigate = useNavigate();
   const url =
-    "https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyDOMf3JdvgxLtmdGNjR1ZowZ1Lsk-b4bec";
+    "https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyAJK2W3MMi1WznXQ-dd2YTCus4vrkE1v9I";
 
   const LoginHandler = () => {
     navigate("/Login");

@@ -7,7 +7,6 @@ const useHttp = () => {
   const sendRequest = async (url, method = "GET", body = null) => {
     setIsLoading(true);
     setError(null);
-    console.log("This is Custom Hook");
     try {
       const response = await fetch(url, {
         method: method,

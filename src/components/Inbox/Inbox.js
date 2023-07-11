@@ -26,7 +26,7 @@ const Inbox = () => {
       try {
         const email = draftemail.split("@");
         const res = await fetch(
-          `https://react-mailbox-6bafc-default-rtdb.asia-southeast1.firebasedatabase.app/mail/${email[0]}/receive.json`
+          `https://react-mail-client-b76f1-default-rtdb.asia-southeast1.firebasedatabase.app/mail/${email[0]}/receive.json`
         );
         if (res.ok) {
           const data = await res.json();
@@ -59,7 +59,7 @@ const Inbox = () => {
     console.log(emailDate);
 
     const res = await fetch(
-      `https://react-mailbox-6bafc-default-rtdb.asia-southeast1.firebasedatabase.app/mail/${emailId}/receive/${email.id}.json`,
+      `https://react-mail-client-b76f1-default-rtdb.asia-southeast1.firebasedatabase.app/mail/${emailId}/receive/${email.id}.json`,
       {
         method: "PUT",
         body: JSON.stringify({
@@ -99,7 +99,7 @@ const Inbox = () => {
 
   const deleteHandler = async (id) => {
     const dlt = draftemail.split("@");
-    const url = `https://react-mailbox-6bafc-default-rtdb.asia-southeast1.firebasedatabase.app/mail/${dlt[0]}/receive/${id}.json`;
+    const url = `https://react-mail-client-b76f1-default-rtdb.asia-southeast1.firebasedatabase.app/mail/${dlt[0]}/receive/${id}.json`;
     try {
       const data = await sendDeleteRequest(url);
       console.log(data);
