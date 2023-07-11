@@ -8,7 +8,6 @@ const Home = () => {
   const editorHandler = () => {
     navigate("/Editor");
   };
-
   return (
     <div>
       <div className={classes["home-container"]}>
