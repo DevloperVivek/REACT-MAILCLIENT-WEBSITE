@@ -8,8 +8,8 @@ import Inbox from "./components/Inbox/Inbox";
 import Editor from "./components/Home/Editor";
 import Sent from "./components/Inbox/Sent";
 import Welcome from "./components/Layout/Welcome";
-import { useDispatch } from "react-redux";
 import { AuthAction } from "./context/Auth-Redux";
+import { useDispatch } from "react-redux";
 import { useEffect } from "react";
 
 function App() {
