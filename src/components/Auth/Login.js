@@ -2,7 +2,7 @@ import React, { useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import classes from "./Login.module.css";
 import { useDispatch } from "react-redux";
-import { AuthAction } from "../../context/Auth-Redux";
+import { AuthAction } from "../../context/AuthRedux";
 
 const Login = () => {
   const emailRef = useRef();

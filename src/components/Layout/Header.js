@@ -2,7 +2,7 @@ import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 import classes from "./Header.module.css";
 import { useDispatch, useSelector } from "react-redux";
-import { AuthAction } from "../../context/Auth-Redux";
+import { AuthAction } from "../../context/AuthRedux";
 import { useEffect } from "react";
 
 const Header = () => {
