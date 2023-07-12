@@ -1,4 +1,3 @@
-import "./App.css";
 import Header from "./components/Layout/Header";
 import Signup from "./components/Auth/Signup";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
@@ -8,7 +7,7 @@ import Inbox from "./components/Inbox/Inbox";
 import Editor from "./components/Home/Editor";
 import Sent from "./components/Inbox/Sent";
 import Welcome from "./components/Layout/Welcome";
-import { AuthAction } from "./context/Auth-Redux";
+import AuthAction from "./context/Auth-Redux";
 import { useDispatch } from "react-redux";
 import { useEffect } from "react";
 
