@@ -1,5 +1,6 @@
   body {
-  background-image: url("https://images.pexels.com/photos/7794441/pexels-photo-7794441.jpeg?auto=compress&cs=tinysrgb&w=400");
+  /* background-image: url("https://images.pexels.com/photos/7794441/pexels-photo-7794441.jpeg?auto=compress&cs=tinysrgb&w=400"); */
+  background-color: rgb(255, 255, 255);
   }
 
   .container {
@@ -10,11 +11,12 @@
   }
   
   .SignUp {
-    background: rgb(223, 247, 255);
-    border: 1px solid rgb(194, 194, 194);
+    background: rgb(255, 255, 255);
+    border: 1px solid rgb(0, 0, 0);
     padding: 20px;
     width: 300px;
     max-width: 90%;
+    color: rgb(0, 0, 0);
   }
   
   .SignUp h2 {
@@ -26,15 +28,15 @@
   
   .SignUp input {
     margin-bottom: 15px;
-    border: 1px solid rgb(194, 194, 194);
+    border: 1px solid rgb(0, 0, 0);
     padding: 10px 10px;
     width: 90%;
     border-radius: 5px;
   }
   
   .SignUp input:hover {
-    background: rgb(187, 219, 255);
-    border: 1px solid rgb(139, 203, 255);
+    background: rgb(229, 241, 255);
+    border: 1px solid rgb(0, 0, 0);
   }
   
   .SignUp button {
@@ -42,29 +44,29 @@
     margin-top: 10px;
     cursor: pointer;
     padding: 10px 60px;
-    margin-bottom: 1
-    0px;
+    margin-bottom: 10px;
     color: white;
     font-size: 15px;
     border-radius: 15px;
-    background: rgb(60, 60, 60);
+    background: rgb(0, 0, 0);
     width: 95%;
   }
   
   .SignUp span {
     cursor: pointer;
-    color: rgb(255, 85, 85);
+    color: rgb(0, 0, 0);
     font-size: 12px;
-    font-weight: 600;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: 400;
     text-align: center;
-    margin-top: 40px;
+    margin-top: 10px 40px;
   }
 
   .SignUp p {
     cursor: pointer;
-    color: rgb(255, 85, 85);
-    font-size: 17px;
-    font-weight: bold;
+    color: rgb(0, 0, 0);
+    font-size: 15px;
+    font-family: Arial, Helvetica, sans-serif;
     text-align: center;
     margin-top: 10px;
   }

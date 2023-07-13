@@ -71,7 +71,7 @@ const Signup = () => {
           <button>Sign Up</button>
         </form>
         <div>
-          <p onClick={LoginHandler}>Already Have An Account ? Login</p>
+          <p onClick={LoginHandler}>Already have an account ? Login</p>
         </div>
       </div>
     </center>

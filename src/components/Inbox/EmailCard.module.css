@@ -1,16 +1,13 @@
 .EmailCardContainer {
-  border: 1px solid #ccc;
+  border: 1px solid black;
   padding: 20px;
   margin: 2rem 3rem;
   cursor: pointer;
   position: relative;
-  height: 50%;
+  height: auto;
   width: 80%;
-  background-color: #defcff;
-}
-
-.EmailCardContainer:hover {
-  background-color: #c8ffff;
+  max-width: 800px;
+  background-color: #ffffff;
 }
 
 .EmailCardHeader {
@@ -18,8 +15,8 @@
 }
 
 .EmailCardHeader h4 {
-  margin-bottom: 15px;
-  font-size: 16px;
+  margin-bottom: 10px;
+  font-size: 18px;
   font-weight: bold;
 }
 
@@ -35,7 +32,7 @@
 
 .EmailCardBody h5 {
   margin: 0;
-  font-size: 14px;
+  font-size: 16px;
   font-weight: bold;
 }
 
@@ -61,15 +58,24 @@
   font-size: 14px;
 }
 
-.closeBtn button:hover {
-  background-color: #007700;
-}
-
 @media screen and (max-width: 720px) {
   .EmailCardContainer {
-    /* margin: 20% auto; */
     margin: 4rem 3rem;
-    height: auto;
-    max-width: 80%;
+  }
+
+  .EmailCardHeader h4 {
+    font-size: 16px;
+  }
+
+  .EmailCardHeader p {
+    font-size: 12px;
+  }
+
+  .EmailCardBody h5 {
+    font-size: 14px;
+  }
+
+  .EmailCardBody div {
+    font-size: 12px;
   }
 }

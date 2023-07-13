@@ -12,7 +12,8 @@
     margin-top: 1rem;
     border-radius: 15px;
     padding: 1px 5px;
-    background-color: rgb(223, 247, 255);
+    background-color: rgb(255, 255, 255);
+    border-bottom: 2px solid black;
   }
   
   .EmailItem {
@@ -25,12 +26,14 @@
   .EmailItem h4 {
     margin: 0;
     font-weight: bold;
+    font-family: 'Times New Roman', Times, serif;
   }
   
   .EmailItem p {
     font-size: 12px;
     margin: 0;
-    color: #777;
+    color: #000000;
+    font-family: 'Times New Roman', Times, serif;
   }
   
   .EmailItem button {
@@ -39,6 +42,7 @@
     background: none;
     border: none;
     color: #007bff;
+    font-family: 'Times New Roman', Times, serif;
   }
   
   .EmailItem button:hover {
@@ -57,6 +61,7 @@
     margin: 15px;
     color: #007bff; 
   }
+
   .EmailCardContainer {
     position: fixed;
     top: 0;
@@ -93,8 +98,3 @@
     border: none;
     color: #007bff;
   }
-  
-  .EmailCard button:hover {
-    text-decoration: underline;
-  }
-  

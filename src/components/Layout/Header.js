@@ -39,7 +39,11 @@ const Header = () => {
             </Link>
           </>
         )}
-        {Auth.isLogin && <span onClick={logoutHandler}>Logout</span>}
+        {Auth.isLogin && (
+          <span className={classes.logout} onClick={logoutHandler}>
+            Logout
+          </span>
+        )}
       </div>
     </header>
   );

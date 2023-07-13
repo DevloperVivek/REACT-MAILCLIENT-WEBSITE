@@ -13,7 +13,6 @@ const Inbox = () => {
   const navigate = useNavigate();
   let [unReadCount, setUnReadCount] = useState(0);
   const mails = emails.length;
-  console.log(unReadCount);
 
   useEffect(() => {
     if (!loggedIn) {
@@ -30,13 +29,17 @@ const Inbox = () => {
         );
         if (res.ok) {
           const data = await res.json();
-          let emailsArr = [];
-          unReadCount += 1;
-          emailsArr = Object.keys(data).map((key) => ({
-            id: key,
-            ...data[key],
-          }));
-          setEmails(emailsArr);
+          if (data) {
+            let emailsArr = Object.keys(data).map((key) => ({
+              id: key,
+              ...data[key],
+            }));
+            setEmails(emailsArr);
+            setUnReadCount(emailsArr.filter((email) => email.isRead).length);
+          } else {
+            setEmails([]);
+            setUnReadCount(0);
+          }
         } else {
           throw new Error("Failed to fetch emails");
         }
@@ -78,11 +81,13 @@ const Inbox = () => {
 
   useEffect(() => {
     let count = 0;
-    emails.forEach((email) => {
-      if (email.isRead) {
-        count++;
-      }
-    });
+    if (emails) {
+      emails.forEach((email) => {
+        if (email.isRead) {
+          count++;
+        }
+      });
+    }
     setUnReadCount(count);
   }, [emails]);
 
@@ -102,7 +107,6 @@ const Inbox = () => {
     const url = `https://react-mail-client-b76f1-default-rtdb.asia-southeast1.firebasedatabase.app/mail/${dlt[0]}/receive/${id}.json`;
     try {
       const data = await sendDeleteRequest(url);
-      console.log(data);
       console.log("Email deleted successfully");
       setEmails(emails.filter((email) => email.id !== id));
     } catch (error) {
@@ -119,7 +123,7 @@ const Inbox = () => {
         )}
       </h3>
       <div className={classes.EmailsContainer}>
-        {emails.length > 0 &&
+        {emails.length > 0 ? (
           emails.map((email) => (
             <div key={email.id}>
               <div className={classes.EmailItem}>
@@ -130,8 +134,10 @@ const Inbox = () => {
                 {email.isRead && <span className={classes.unRead} />}
               </div>
             </div>
-          ))}
-        {emails.length === 0 && <h2>No emails found</h2>}
+          ))
+        ) : (
+          <h2>No emails found</h2>
+        )}
       </div>
       {selectedEmail ? (
         <InboxEmailCard email={selectedEmail} onClose={handleCloseEmailCard} />

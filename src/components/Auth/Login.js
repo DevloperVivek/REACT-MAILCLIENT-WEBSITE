@@ -71,7 +71,7 @@ const Login = () => {
           <span onClick={forgotPasswordHandler}>Forgot Password?</span>
         </div>
         <div>
-          <p onClick={toggleHandler}>Dont Have Account ? Signup</p>
+          <p onClick={toggleHandler}>Don't have an account ? Signup</p>
         </div>
       </div>
     </center>
