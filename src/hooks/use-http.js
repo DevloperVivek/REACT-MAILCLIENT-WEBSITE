@@ -15,6 +15,9 @@ const useHttp = () => {
         },
         body: body ? JSON.stringify(body) : null,
       });
+      if (!response.ok) {
+        throw new Error("Request failed!");
+      }
 
       if (!response.ok) {
         throw new Error("Request failed!");

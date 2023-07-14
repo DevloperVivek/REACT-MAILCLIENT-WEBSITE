@@ -36,6 +36,10 @@
     text-decoration: none;
   }
   
+  .header-item span{
+    cursor: pointer;
+  }
+
   .header-item a:hover,
   .header-item a:active,
   .header-item a.active {

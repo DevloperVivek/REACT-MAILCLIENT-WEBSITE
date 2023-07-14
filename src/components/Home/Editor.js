@@ -21,7 +21,7 @@ const Editor = () => {
       subject: subRef.current.value,
       edit: editorRef.current.value,
       date: new Date(),
-      isRead: true,
+      isRead: false,
     };
 
     // Custom Hook useHttp
@@ -40,6 +40,7 @@ const Editor = () => {
 
     if (resData && retData) {
       alert("Email has been sent");
+      window.location.reload();
     }
   };
 

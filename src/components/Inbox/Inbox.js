@@ -18,7 +18,7 @@ const Inbox = () => {
     if (!loggedIn) {
       navigate("/Login");
     }
-  }, []);
+  }, [loggedIn, navigate]);
 
   useEffect(() => {
     const fetchEmails = async () => {
@@ -35,7 +35,7 @@ const Inbox = () => {
               ...data[key],
             }));
             setEmails(emailsArr);
-            setUnReadCount(emailsArr.filter((email) => email.isRead).length);
+            setUnReadCount(emailsArr.filter((email) => !email.isRead).length);
           } else {
             setEmails([]);
             setUnReadCount(0);
@@ -47,35 +47,71 @@ const Inbox = () => {
         console.error(error);
       }
     };
+
     const interval = setInterval(fetchEmails, 2000);
+
     return () => {
       clearInterval(interval);
     };
-  }, [setSelectedEmail, selectedEmail]);
+  }, [draftemail]);
+
+  // const handleEmailClick = async (email) => {
+  //   setSelectedEmail(email);
+  //   const emailId = draftemail.split("@")[0];
+  //   const emailDate = new Date(email.date).toISOString();
+  //   const res = await fetch(
+  //     `https://react-mail-client-b76f1-default-rtdb.asia-southeast1.firebasedatabase.app/mail/${emailId}/receive/${email.id}.json`,
+  //     {
+  //       method: "PUT",
+  //       body: JSON.stringify({
+  //         date: emailDate,
+  //         edit: email.edit,
+  //         from: email.from,
+  //         isRead: true,
+  //         subject: email.subject,
+  //       }),
+  //     }
+  //   );
+  // };
 
   const handleEmailClick = async (email) => {
     setSelectedEmail(email);
-    unReadCount -= 1;
-    console.log(email.data);
     const emailId = draftemail.split("@")[0];
     const emailDate = new Date(email.date).toISOString();
-    console.log(emailDate);
 
-    const res = await fetch(
-      `https://react-mail-client-b76f1-default-rtdb.asia-southeast1.firebasedatabase.app/mail/${emailId}/receive/${email.id}.json`,
-      {
-        method: "PUT",
-        body: JSON.stringify({
-          date: emailDate,
-          edit: email.edit,
-          from: email.from,
-          isRead: false,
-          subject: email.subject,
-        }),
+    if (!email.isRead) {
+      const res = await fetch(
+        `https://react-mail-client-b76f1-default-rtdb.asia-southeast1.firebasedatabase.app/mail/${emailId}/receive/${email.id}.json`,
+        {
+          method: "PUT",
+          body: JSON.stringify({
+            date: emailDate,
+            edit: email.edit,
+            from: email.from,
+            isRead: true,
+            subject: email.subject,
+          }),
+        }
+      );
+
+      if (res.ok) {
+        console.log(res);
+        setEmails((prevEmails) => {
+          const updatedEmails = prevEmails.map((prevEmail) => {
+            if (prevEmail.id === email.id) {
+              return {
+                ...prevEmail,
+                isRead: true,
+              };
+            }
+            return prevEmail;
+          });
+          setUnReadCount(updatedEmails.filter((email) => !email.isRead).length);
+          return updatedEmails;
+        });
+      } else {
+        console.error("Failed to mark the email as read");
       }
-    );
-    if (res.ok) {
-      console.log("Done");
     }
   };
 
@@ -83,7 +119,7 @@ const Inbox = () => {
     let count = 0;
     if (emails) {
       emails.forEach((email) => {
-        if (email.isRead) {
+        if (!email.isRead) {
           count++;
         }
       });
@@ -106,7 +142,7 @@ const Inbox = () => {
     const dlt = draftemail.split("@");
     const url = `https://react-mail-client-b76f1-default-rtdb.asia-southeast1.firebasedatabase.app/mail/${dlt[0]}/receive/${id}.json`;
     try {
-      const data = await sendDeleteRequest(url);
+      await sendDeleteRequest(url);
       console.log("Email deleted successfully");
       setEmails(emails.filter((email) => email.id !== id));
     } catch (error) {
@@ -128,10 +164,10 @@ const Inbox = () => {
             <div key={email.id}>
               <div className={classes.EmailItem}>
                 <h4>From: {email.from}</h4>
-                <p>Date:{getSimplifiedDate(email.date)}</p>
+                <p>Date: {getSimplifiedDate(email.date)}</p>
                 <button onClick={() => handleEmailClick(email)}>Open</button>
                 <button onClick={() => deleteHandler(email.id)}>Delete</button>
-                {email.isRead && <span className={classes.unRead} />}
+                {!email.isRead && <span className={classes.unRead} />}
               </div>
             </div>
           ))
@@ -139,9 +175,9 @@ const Inbox = () => {
           <h2>No emails found</h2>
         )}
       </div>
-      {selectedEmail ? (
+      {selectedEmail && (
         <InboxEmailCard email={selectedEmail} onClose={handleCloseEmailCard} />
-      ) : null}
+      )}
     </div>
   );
 };

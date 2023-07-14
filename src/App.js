@@ -1,3 +1,4 @@
+import "./App.css";
 import Header from "./components/Layout/Header";
 import Signup from "./components/Auth/Signup";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
@@ -36,5 +37,4 @@ function App() {
     </Router>
   );
 }
-
 export default App;

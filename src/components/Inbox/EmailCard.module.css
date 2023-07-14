@@ -8,6 +8,7 @@
   width: 80%;
   max-width: 800px;
   background-color: #ffffff;
+  font-family: 'Times New Roman', Times, serif;
 }
 
 .EmailCardHeader {
@@ -15,15 +16,17 @@
 }
 
 .EmailCardHeader h4 {
-  margin-bottom: 10px;
   font-size: 18px;
+  font-family: 'Times New Roman', Times, serif;
+  margin-bottom: 15px;
   font-weight: bold;
 }
 
 .EmailCardHeader p {
   margin: 0;
+  font-family: 'Times New Roman', Times, serif;
   font-size: 14px;
-  color: #555;
+  color: #000000;
 }
 
 .EmailCardBody {
@@ -33,6 +36,7 @@
 .EmailCardBody h5 {
   margin: 0;
   font-size: 16px;
+  font-size: 14px;
   font-weight: bold;
 }
 
@@ -59,8 +63,11 @@
 }
 
 @media screen and (max-width: 720px) {
+  
   .EmailCardContainer {
     margin: 4rem 3rem;
+    height: auto;
+    max-width: 80%;
   }
 
   .EmailCardHeader h4 {
