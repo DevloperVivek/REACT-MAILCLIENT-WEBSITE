@@ -55,25 +55,6 @@ const Inbox = () => {
     };
   }, [draftemail]);
 
-  // const handleEmailClick = async (email) => {
-  //   setSelectedEmail(email);
-  //   const emailId = draftemail.split("@")[0];
-  //   const emailDate = new Date(email.date).toISOString();
-  //   const res = await fetch(
-  //     `https://react-mail-client-b76f1-default-rtdb.asia-southeast1.firebasedatabase.app/mail/${emailId}/receive/${email.id}.json`,
-  //     {
-  //       method: "PUT",
-  //       body: JSON.stringify({
-  //         date: emailDate,
-  //         edit: email.edit,
-  //         from: email.from,
-  //         isRead: true,
-  //         subject: email.subject,
-  //       }),
-  //     }
-  //   );
-  // };
-
   const handleEmailClick = async (email) => {
     setSelectedEmail(email);
     const emailId = draftemail.split("@")[0];

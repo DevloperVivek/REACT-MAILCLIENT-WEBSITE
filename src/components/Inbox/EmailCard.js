@@ -13,7 +13,7 @@ const EmailCard = ({ email, onClose }) => {
         <h4>From: {email.from}</h4>
         <p>Date: {getSimplifiedDate(email.date)}</p>
       </div>
-      <div>
+      <div className={classes.EmailCardBody}>
         <h5>Subject: {email.subject}</h5>
         <div dangerouslySetInnerHTML={{ __html: email.edit }} />
       </div>
