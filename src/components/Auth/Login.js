@@ -1,8 +1,8 @@
 import React, { useRef } from "react";
 import { useNavigate } from "react-router-dom";
-import classes from "./Login.module.css";
 import { useDispatch } from "react-redux";
 import { AuthAction } from "../../context/AuthRedux";
+import classes from "./Login.module.css";
 
 const Login = () => {
   const emailRef = useRef();
@@ -44,9 +44,10 @@ const Login = () => {
         };
         dispatch(AuthAction.login(set));
         console.log("Successfully Logged In");
-        navigate("/Home");
+        navigate("/");
       }
     } catch (error) {
+      alert("Wrong email or password!");
       console.log(error);
     }
   };

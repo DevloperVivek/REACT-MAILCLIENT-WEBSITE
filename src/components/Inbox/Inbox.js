@@ -2,8 +2,8 @@ import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import InboxEmailCard from "./InboxEmailCard";
-import classes from "./Sent.module.css";
 import useHttp from "../../hooks/use-http";
+import classes from "../Sent/Sent.module.css";
 
 const Inbox = () => {
   const [selectedEmail, setSelectedEmail] = useState(null);
@@ -153,7 +153,7 @@ const Inbox = () => {
             </div>
           ))
         ) : (
-          <h2>No emails found</h2>
+          <h3>No emails found</h3>
         )}
       </div>
       {selectedEmail && (

@@ -1,6 +1,6 @@
   body {
-  background-color: rgb(255, 255, 255);
-  /* background-image: url("https://images.pexels.com/photos/7794441/pexels-photo-7794441.jpeg?auto=compress&cs=tinysrgb&w=400"); */
+    background-color: rgb(255, 255, 255);
+    /* background-image: url("../../assets/workplace-2303851.jpg"); */
   }
 
   .container {
@@ -13,7 +13,7 @@
   .SignUp {
     background: rgb(255, 255, 255);
     border: 1px solid rgb(0, 0, 0);
-    padding: 20px;
+    padding: 30px;
     width: 300px;
     max-width: 90%;
     color: rgb(0, 0, 0);

@@ -1,9 +1,9 @@
 import React from "react";
 import { Link, useNavigate } from "react-router-dom";
-import classes from "./Header.module.css";
 import { useDispatch, useSelector } from "react-redux";
 import { AuthAction } from "../../context/AuthRedux";
 import { useEffect } from "react";
+import classes from "./Header.module.css";
 
 const Header = () => {
   const Auth = useSelector((state) => state.auth);
@@ -12,7 +12,7 @@ const Header = () => {
 
   const logoutHandler = () => {
     dispatch(AuthAction.logout());
-    navigate("/Login");
+    navigate("/login");
   };
 
   useEffect(() => {
@@ -20,7 +20,7 @@ const Header = () => {
     if (!login && window.location.pathname === "/Home") {
       navigate("/login");
     }
-  }, []);
+  }, [navigate]);
 
   return (
     <header>
@@ -28,13 +28,13 @@ const Header = () => {
         {!Auth.isLogin && <>React MailBox</>}
         {Auth.isLogin && (
           <>
-            <Link to="/Home">
+            <Link to="/">
               <span>Home</span>
             </Link>
-            <Link to="/Inbox">
+            <Link to="/inbox">
               <span>Inbox</span>
             </Link>
-            <Link to="/Sent">
+            <Link to="/sent">
               <span>Sent</span>
             </Link>
           </>

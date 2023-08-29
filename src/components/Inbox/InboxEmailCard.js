@@ -1,5 +1,5 @@
 import React from "react";
-import classes from "./EmailCard.module.css";
+import classes from "../Sent/EmailCard.module.css";
 
 const EmailCard = ({ email, onClose }) => {
   const getSimplifiedDate = (dateString) => {

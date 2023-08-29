@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
-import classes from "./Sent.module.css";
 import { useSelector } from "react-redux";
 import EmailCard from "./EmailCard";
+// import useHttp from "../../../../hooks/use-http";
 import useHttp from "../../hooks/use-http";
+import classes from "./Sent.module.css";
 
 const Sent = () => {
   const [selectedEmail, setSelectedEmail] = useState(null);
@@ -78,7 +79,7 @@ const Sent = () => {
               </div>
             </div>
           ))}
-        {sentEmails.length === 0 && <h2>No emails found</h2>}{" "}
+        {sentEmails.length === 0 && <h3>No emails found</h3>}{" "}
       </div>
       {selectedEmail ? (
         <EmailCard email={selectedEmail} onClose={handleCloseEmailCard} />

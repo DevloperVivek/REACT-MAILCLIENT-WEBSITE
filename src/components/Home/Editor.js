@@ -1,8 +1,8 @@
-import JoditEditor from "jodit-react";
 import { useRef } from "react";
 import { useSelector } from "react-redux";
-import classes from "./Editor.module.css";
+import JoditEditor from "jodit-react";
 import useHttp from "../../hooks/use-http";
+import classes from "./Editor.module.css";
 
 const Editor = () => {
   const draftemail = useSelector((state) => state.auth.email);
