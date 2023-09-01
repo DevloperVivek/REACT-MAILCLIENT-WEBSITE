@@ -1,5 +1,7 @@
-import { useRef } from "react";
-import { useSelector } from "react-redux";
+import { useEffect, useRef } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { AuthAction } from "../../context/AuthRedux";
 import JoditEditor from "jodit-react";
 import useHttp from "../../hooks/use-http";
 import classes from "./Editor.module.css";
@@ -11,6 +13,17 @@ const Editor = () => {
   const subRef = useRef();
   const editorRef = useRef();
   const { isLoading, sendRequest } = useHttp();
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const login = JSON.parse(localStorage.getItem("login"));
+    if (!login) {
+      navigate("/login");
+    } else {
+      dispatch(AuthAction.login(login));
+    }
+  }, [dispatch, navigate]);
 
   const submitHandler = async (e) => {
     e.preventDefault();
