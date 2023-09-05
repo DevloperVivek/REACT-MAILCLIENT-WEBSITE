@@ -16,7 +16,7 @@ const Inbox = () => {
 
   useEffect(() => {
     if (!loggedIn) {
-      navigate("/Login");
+      navigate("/login");
     }
   }, [loggedIn, navigate]);
 

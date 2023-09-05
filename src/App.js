@@ -7,7 +7,6 @@ import Signup from "./components/Auth/Signup";
 import Login from "./components/Auth/Login";
 import Home from "./components/Home/Home";
 import Inbox from "./components/Inbox/Inbox";
-import Editor from "./components/Home/Editor";
 import Sent from "./components/Sent/Sent";
 import "./App.css";
 
@@ -30,7 +29,6 @@ function App() {
         <Route path={"/signup"} element={<Signup />} />
         <Route path={"/login"} element={<Login />} />
         <Route path={"/"} element={<Home />} />
-        <Route path={"/editor"} element={<Editor />} />
         <Route path={"/inbox"} element={<Inbox />} />
         <Route path={"/sent"} element={<Sent />} />
       </Routes>
